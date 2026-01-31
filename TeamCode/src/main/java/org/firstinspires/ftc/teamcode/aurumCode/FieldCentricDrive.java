@@ -16,10 +16,10 @@ public class FieldCentricDrive {
 
     public FieldCentricDrive(HardwareMap hardwareMap) {
         //initialize motors
-        bL = hardwareMap.get(DcMotorEx.class, "bL");
-        fL = hardwareMap.get(DcMotorEx.class, "1");
-        bR = hardwareMap.get(DcMotorEx.class, "bR");
-        fR = hardwareMap.get(DcMotorEx.class, "0");
+        bL = hardwareMap.get(DcMotorEx.class, "backLeft");
+        fL = hardwareMap.get(DcMotorEx.class, "leftFront");
+        bR = hardwareMap.get(DcMotorEx.class, "backRight");
+        fR = hardwareMap.get(DcMotorEx.class, "rightFront");
 
         fL.setDirection(DcMotor.Direction.REVERSE);
         bL.setDirection(DcMotor.Direction.REVERSE);
@@ -33,8 +33,8 @@ public class FieldCentricDrive {
         // Initialize IMU
         imu = hardwareMap.get(IMU.class, "imu");
         IMU.Parameters parameters = new IMU.Parameters(new RevHubOrientationOnRobot(
-                RevHubOrientationOnRobot.LogoFacingDirection.RIGHT,
-                RevHubOrientationOnRobot.UsbFacingDirection.UP));
+                RevHubOrientationOnRobot.LogoFacingDirection.LEFT,
+                RevHubOrientationOnRobot.UsbFacingDirection.DOWN));
         imu.initialize(parameters);
     }
 

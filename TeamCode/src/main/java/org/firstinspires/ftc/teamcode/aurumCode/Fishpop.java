@@ -1,29 +1,21 @@
 package org.firstinspires.ftc.teamcode.aurumCode;
 
-import android.graphics.Canvas;
 import android.util.Size;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
-
-import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
-import org.firstinspires.ftc.robotcore.external.hardware.camera.BuiltinCameraDirection;
-import org.firstinspires.ftc.robotcore.internal.camera.calibration.CameraCalibration;
-import org.firstinspires.ftc.vision.VisionPortal;
-import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;
-import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
-import java.util.ArrayList;
+import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+import org.firstinspires.ftc.vision.VisionPortal;
+import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;
+import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor;
+
 import java.util.List;
 
 @TeleOp
@@ -72,11 +64,11 @@ public class Fishpop extends LinearOpMode {
         DesiredTag desiredTag = new DesiredTag();
         initVision();
 
-        flyWHeel = hardwareMap.get(DcMotorEx.class, "spinny");
+        flyWHeel = hardwareMap.get(DcMotorEx.class, "flyWheel");
         Intake = hardwareMap.get(DcMotorEx.class, "intake");
-        flicker = hardwareMap.get(Servo.class, "SingleBallPusherServo");
+        flicker = hardwareMap.get(Servo.class, "flicker");
 
-        flicker.setPosition(0.2);
+        flicker.setPosition(1);
         //PIDF SETUP
         flyWHeel.setDirection(DcMotorSimple.Direction.REVERSE);
         flyWHeel.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -98,17 +90,14 @@ public class Fishpop extends LinearOpMode {
             List<AprilTagDetection> currentDetections = aprilTag.getDetections();
             int detectedTagId = desiredTag.findPatternTag(currentDetections);
 
-            double targetDistanceInches = desiredTag.getTagRange(); // THIS CAN BE CHANGED OF WE ARE ONLY SHOOTING FROM THE VERY BACK OR ON THE TIP OF THE TRIANGLE test: 89 in = 2.2606 meters
-            //double targetHeightInches = desiredTag.getTagY(); // THIS CAN BE CHANGE TO HOW TALL THE DEPOT (SCORING BASKET) IS! test: 39.5 in = 1.0033 meters
-            //double launchingAngleDegrees = 66.8;
-
+            double targetDistanceInches = desiredTag.getTagRange();
 
             //flicker
             if(gamepad2.dpad_up){
-                flicker.setPosition(0.2);
+                flicker.setPosition(0);
             }
             else{
-                flicker.setPosition(0);
+                flicker.setPosition(0.5);
             }
 
 

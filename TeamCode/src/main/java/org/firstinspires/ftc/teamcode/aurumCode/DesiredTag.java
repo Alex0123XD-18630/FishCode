@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode.aurumCode;
 
 import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;
-import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor;
 
 import java.util.List;
 
